@@ -21,7 +21,7 @@ router.post('/google',
         check('token','El token de google es obligatorio').not().isEmpty(),
         validarCampos
     ],
-    validarJWT  );     
+    googleSignIn  );     
     
 router.get('/renew',validarJWT,renewToken);      
 

@@ -6,11 +6,14 @@ const {check}  = require('express-validator');
 const {validarCampos} = require('../middlewares/validar-campos');
 const {validarJWT} = require('../middlewares/validar-jwt');
 
-const {getMedicos,crearMedico,actualizarMedico,eliminarMedico} = require('../controllers/medicos.controller');
+const {getMedicos,crearMedico,actualizarMedico,eliminarMedico,getMedicoById} = require('../controllers/medicos.controller');
 
 const router = Router();
 
 router.get('/',[validarJWT],getMedicos);
+
+router.get('/:id',validarJWT,getMedicoById);                
+
 
 router.post('/', [
                     validarJWT,

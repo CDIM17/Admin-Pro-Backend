@@ -4,6 +4,7 @@ const bcrypt       = require('bcryptjs');
 const {generarJWT} = require('../helpers/jwt');
 const { googleVerify } = require('../helpers/google-verify');
 
+const {getMenuFrontend} = require('../helpers/menu-frontend');
 
 const login = async(req,res) => {
 
@@ -40,7 +41,8 @@ const login = async(req,res) => {
 
             ok:true,
             msg:'Login',
-            token
+            token,
+            menu:getMenuFrontend(usuarioDB.role)
 
         });
 
@@ -94,7 +96,8 @@ const googleSignIn = async(req,res = response) => {
             name: googleUser.name,
             email: googleUser.email,
             picture: googleUser.picture,
-            token
+            token,
+            menu:getMenuFrontend(usuario.role)
         })
     }
     catch(error)
@@ -121,7 +124,8 @@ const renewToken = async(req,res = response) => {
     res.json({
         ok:true,
         token,
-        usuario:UsuarioDB
+        usuario:UsuarioDB,
+        menu:getMenuFrontend(UsuarioDB.role)
     })
 
 }
